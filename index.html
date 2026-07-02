@@ -4,132 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SoftBoard — PDIS-16</title>
-<style>
-  :root{
-    --ink:#0B0F14;
-    --ink-2:#11161D;
-    --paper:#E9E4D8;
-    --paper-dim:#B9B2A2;
-    --amber:#E8A23A;
-    --amber-dim:#7A5B26;
-    --line:#2A323D;
-    --ok:#5C9E7A;
-    --warn:#D9A441;
-    --crit:#C9603F;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--ink);
-    color:var(--paper);
-    font-family:'IBM Plex Sans',Arial,Helvetica,sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
-  }
-  .mono{font-family:'IBM Plex Mono',Consolas,Menlo,monospace;}
-  a{color:var(--amber); text-decoration:none;}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
-
-  header.top{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:24px clamp(20px,5vw,64px);
-    border-bottom:1px solid var(--line);
-  }
-  .mark{display:flex; align-items:center; gap:10px; font-weight:600; letter-spacing:0.02em;}
-  .mark .dot{width:8px;height:8px;border-radius:50%;background:var(--amber); box-shadow:0 0 8px var(--amber);}
-  nav a{font-size:13px; color:var(--paper-dim); margin-left:28px; letter-spacing:0.04em; text-transform:uppercase;}
-  nav a:hover{color:var(--amber);}
-
-  .hero{
-    padding:clamp(56px,10vw,108px) clamp(20px,5vw,64px) clamp(40px,6vw,72px);
-    border-bottom:1px solid var(--line);
-    position:relative;
-    overflow:hidden;
-  }
-  .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
-    color:var(--amber); margin-bottom:18px;
-  }
-  h1{
-    font-size:clamp(34px,6.4vw,64px);
-    line-height:1.04;
-    margin:0 0 22px;
-    max-width:15ch;
-    font-weight:650;
-    letter-spacing:-0.01em;
-  }
-  h1 em{font-style:normal; color:var(--amber);}
-  .lede{
-    max-width:620px; font-size:clamp(16px,2vw,19px); color:#CFC9BB; margin-bottom:40px;
-  }
-  .equation-card{
-    margin-top:8px;
-    border:1px solid var(--line);
-    background:var(--ink-2);
-    padding:22px clamp(18px,3vw,28px);
-    max-width:620px;
-  }
-  .equation-card .label{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--paper-dim); margin-bottom:10px;}
-  .equation-card .eq{font-family:'IBM Plex Mono',monospace; font-size:clamp(15px,2.4vw,19px); color:var(--paper); margin-bottom:10px; word-break:break-word;}
-  .equation-card .note{font-size:13px; color:var(--paper-dim);}
-
-  section{padding:clamp(48px,8vw,84px) clamp(20px,5vw,64px); border-bottom:1px solid var(--line);}
-  section h2{
-    font-size:clamp(22px,3.4vw,30px); margin:0 0 32px; font-weight:600; max-width:24ch;
-  }
-  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  @media (max-width:760px){.grid3{grid-template-columns:1fr;}}
-  .cell{background:var(--ink); padding:28px 26px;}
-  .cell .tag{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--amber); letter-spacing:0.08em; margin-bottom:12px;}
-  .cell h3{font-size:17px; margin:0 0 10px; font-weight:600;}
-  .cell p{font-size:14.5px; color:#B9B2A2; margin:0;}
-
-  .gauge-wrap{
-    border:1px solid var(--line); background:var(--ink-2);
-    padding:clamp(20px,4vw,32px); max-width:780px;
-  }
-  .gauge-title{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--paper-dim); margin-bottom:18px;}
-  .bands{display:flex; height:14px; border-radius:2px; overflow:hidden; margin-bottom:10px;}
-  .bands span{flex:1; position:relative;}
-  .b1{background:var(--ok);} .b2{background:var(--warn);} .b3{background:#C97A3F;} .b4{background:var(--crit);}
-  .marker{
-    position:absolute; top:-9px; width:2px; height:32px; background:var(--paper);
-    left:31%;
-    animation:drift 7s ease-in-out infinite;
-  }
-  @keyframes drift{
-    0%{left:8%;} 35%{left:31%;} 60%{left:31%;} 80%{left:58%;} 100%{left:58%;}
-  }
-  .band-labels{display:flex; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--paper-dim); justify-content:space-between; margin-bottom:18px;}
-  .readout{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:18px 28px; font-family:'IBM Plex Mono',monospace; font-size:13px;}
-  .readout div span{display:block; color:var(--paper-dim); font-size:11px; margin-bottom:4px;}
-  .readout div b{display:block; color:var(--paper); font-size:15px;}
-
-  .principles{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); max-width:900px;}
-  @media (max-width:700px){.principles{grid-template-columns:1fr;}}
-  .principles div{background:var(--ink); padding:22px 24px;}
-  .principles .no{font-family:'IBM Plex Mono',monospace; color:var(--amber-dim); font-size:13px; margin-bottom:8px;}
-  .principles h4{margin:0 0 8px; font-size:15.5px;}
-  .principles p{margin:0; font-size:14px; color:#B9B2A2;}
-
-  footer{padding:clamp(36px,6vw,56px) clamp(20px,5vw,64px); }
-  footer .row{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;}
-  footer .legal{font-size:13px; color:var(--paper-dim); max-width:480px;}
-  footer .contact a{display:block; font-size:14px; margin-bottom:6px;}
-  footer .fineprint{margin-top:32px; font-size:12px; color:#5A6068; font-family:'IBM Plex Mono',monospace;}
-</style>
+<meta name="description" content="PDIS-16 by SoftBoard — physics-driven infrastructure stability. One drift number per asset, flagged before failure. No training data, no black box, no new hardware.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
 <header class="top">
-  <div class="mark"><span class="dot"></span> SOFTBOARD</div>
+  <div class="mark"><span class="dot"></span> <a href="/">SOFTBOARD</a></div>
   <nav>
-    <a href="#system">System</a>
-    <a href="#approach">Approach</a>
+    <a href="/" class="active">Home</a>
+    <a href="/technology.html">Technology</a>
+    <a href="/about.html">About</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -143,20 +31,24 @@
     <div class="eq">D(t) = Σ wᵢ · |δᵢ(t)| &nbsp;→&nbsp; compared against fixed, published thresholds</div>
     <div class="note">δᵢ is the live deviation of one measured parameter from its expected physical behaviour. Nothing here is fitted to historical data — it's derived from the physics of the asset itself.</div>
   </div>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="/technology.html">How it works →</a>
+    <a class="btn btn-ghost" href="/about.html">About SoftBoard</a>
+  </div>
 </section>
 
-<section id="system">
+<section id="highlights">
   <h2>One asset's silent drift is rarely just that asset's problem.</h2>
   <div class="grid3">
     <div class="cell">
       <div class="tag">001 — DETECT</div>
       <h3>Physics, not pattern-matching</h3>
-      <p>Every asset class — pipelines, rotating machinery, structures, treatment plants — is governed by published, peer-reviewed equations. PDIS-16 applies them continuously, so a deviation is flagged because it violates physics, not because it looks unusual to a model.</p>
+      <p>Every asset class is governed by published, peer-reviewed equations. PDIS-16 applies them continuously, so a deviation is flagged because it violates physics, not because it looks unusual to a model.</p>
     </div>
     <div class="cell">
       <div class="tag">002 — CORRELATE</div>
       <h3>Cross-sector by design</h3>
-      <p>A water-pressure drop and a power-sector current spike in the same corridor, minutes apart, are rarely a coincidence. PDIS-16's cascade logic is built to catch the failure that crosses sector lines before either utility sees it alone.</p>
+      <p>A water-pressure drop and a power-sector current spike in the same corridor, minutes apart, are rarely a coincidence. PDIS-16 is built to catch the failure that crosses sector lines before either utility sees it alone.</p>
     </div>
     <div class="cell">
       <div class="tag">003 — VERIFY</div>
@@ -164,48 +56,8 @@
       <p>Before any reading reaches the physics layer, it's checked for plausibility — frozen sensors, impossible rates of change, clock drift between devices. A system that can't tell a broken sensor from a broken pipe isn't ready for either.</p>
     </div>
   </div>
-</section>
-
-<section>
-  <h2>What the system actually reports</h2>
-  <div class="gauge-wrap">
-    <div class="gauge-title">Composite Drift Index — live asset, illustrative</div>
-    <div class="bands">
-      <span class="b1"></span><span class="b2"><span class="marker"></span></span><span class="b3"></span><span class="b4"></span>
-    </div>
-    <div class="band-labels"><span>NORMAL</span><span>WARNING</span><span>CRITICAL</span><span>SHUTDOWN</span></div>
-    <div class="readout">
-      <div><span>D(t)</span><b>0.31</b></div>
-      <div><span>Dominant parameter</span><b>Δ pressure</b></div>
-      <div><span>Failure window</span><b>est. 41 days</b></div>
-      <div><span>Confidence</span><b>Baseline-Locked</b></div>
-    </div>
-  </div>
-</section>
-
-<section id="approach">
-  <h2>What we're building toward, plainly</h2>
-  <div class="principles">
-    <div>
-      <div class="no">/ 01</div>
-      <h4>Additive, not a replacement</h4>
-      <p>PDIS-16 sits on top of telemetry a site already has — SCADA, PLC, existing sensors. We don't ask anyone to rip out instrumentation that already works.</p>
-    </div>
-    <div>
-      <div class="no">/ 02</div>
-      <h4>No silent assumptions</h4>
-      <p>Every fault code, every default, every gap is logged and surfaced — never quietly resolved in a direction nobody asked for.</p>
-    </div>
-    <div>
-      <div class="no">/ 03</div>
-      <h4>Early, and honest about it</h4>
-      <p>This is a founder-built architecture, fully specified and implemented in software, currently moving toward independent technical validation. We'd rather say that plainly than overstate where we are.</p>
-    </div>
-    <div>
-      <div class="no">/ 04</div>
-      <h4>South African-built, globally scoped</h4>
-      <p>SoftBoard is built from South Africa, for infrastructure that looks the same everywhere — a pipe under pressure behaves like physics, not geography.</p>
-    </div>
+  <div class="cta-row">
+    <a class="btn btn-ghost" href="/technology.html">See the full system →</a>
   </div>
 </section>
 
@@ -217,7 +69,7 @@
     </div>
     <div class="contact">
       <a href="mailto:nksbongani7@gmail.com">bongani@softboard.co.za</a>
-      <a href="https://github.com/nksbongani7-ux" target="_blank" rel="noopener">github.com/bongani@softboard.co.za</a>
+      <a href="https://github.com/nksbongani7-ux" target="_blank" rel="noopener">github.com/nksbongani7-ux</a>
     </div>
   </div>
   <div class="fineprint">PDIS-16 — Founder &amp; Director: Bongani Brendan Nkosi</div>
