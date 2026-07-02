@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technology — SoftBoard PDIS-16</title>
+<meta name="description" content="How PDIS-16 works: continuous physics-based monitoring across water, power, gas, structural, road, BESS and semiconductor assets, over OPC-UA, MQTT, Modbus and CAN.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="mark"><span class="dot"></span> <a href="/">SOFTBOARD</a></div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/technology.html" class="active">Technology</a>
+    <a href="/about.html">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Technology — How it works</div>
+  <h1>Continuous physics, one number per asset.</h1>
+  <p class="lede">In plain language: PDIS-16 monitors physical infrastructure continuously, produces a single drift number for each asset, and flags deviations before they become failures. No dashboards full of raw sensor noise — one value you can act on, measured against fixed physical limits rather than a guess about what "normal" looked like last week.</p>
+  <div class="equation-card">
+    <div class="label">Composite Drift Index — public-domain physics, applied live</div>
+    <div class="eq">D(t) = Σ wᵢ · |δᵢ(t)|</div>
+    <div class="note">Each δᵢ is the live deviation of one measured parameter from the physical behaviour the asset should exhibit. The formula is textbook physics; the value is what tells you how far a real asset has drifted, right now.</div>
+  </div>
+</section>
+
+<section id="system">
+  <h2>Three things happen to every reading, every cycle.</h2>
+  <div class="grid3">
+    <div class="cell">
+      <div class="tag">001 — DETECT</div>
+      <h3>Physics, not pattern-matching</h3>
+      <p>Every asset class is governed by published, peer-reviewed equations. PDIS-16 applies them continuously, so a deviation is flagged because it violates physics, not because it looks unusual to a model.</p>
+    </div>
+    <div class="cell">
+      <div class="tag">002 — CORRELATE</div>
+      <h3>Cross-sector by design</h3>
+      <p>A water-pressure drop and a power-sector current spike in the same corridor, minutes apart, are rarely a coincidence. PDIS-16's cascade logic is built to catch the failure that crosses sector lines before either utility sees it alone.</p>
+    </div>
+    <div class="cell">
+      <div class="tag">003 — VERIFY</div>
+      <h3>Distrust the sensor first</h3>
+      <p>Before any reading reaches the physics layer, it's checked for plausibility — frozen sensors, impossible rates of change, clock drift between devices. A system that can't tell a broken sensor from a broken pipe isn't ready for either.</p>
+    </div>
+  </div>
+</section>
+
+<section id="assets">
+  <h2>Asset classes it covers.</h2>
+  <p class="lead-p">Each of these is a domain of physical infrastructure PDIS-16 is designed to watch. The underlying physics differs by class — but the output is the same single, comparable drift number.</p>
+  <div class="chips">
+    <span class="chip"><span class="k">01</span>Water</span>
+    <span class="chip"><span class="k">02</span>Power</span>
+    <span class="chip"><span class="k">03</span>Gas</span>
+    <span class="chip"><span class="k">04</span>Structural</span>
+    <span class="chip"><span class="k">05</span>Road</span>
+    <span class="chip"><span class="k">06</span>BESS — battery energy storage</span>
+    <span class="chip"><span class="k">07</span>Semiconductor</span>
+  </div>
+</section>
+
+<section id="protocols">
+  <h2>Protocols it speaks.</h2>
+  <p class="lead-p">PDIS-16 reads the telemetry a site already produces, over the open industrial standards it already uses. No proprietary bus, no rip-and-replace.</p>
+  <div class="chips">
+    <span class="chip"><span class="k">▸</span>OPC-UA</span>
+    <span class="chip"><span class="k">▸</span>MQTT</span>
+    <span class="chip"><span class="k">▸</span>Modbus</span>
+    <span class="chip"><span class="k">▸</span>CAN</span>
+  </div>
+</section>
+
+<section id="report">
+  <h2>What the system actually reports.</h2>
+  <div class="gauge-wrap">
+    <div class="gauge-title">Composite Drift Index — live asset, illustrative</div>
+    <div class="bands">
+      <span class="b1"></span><span class="b2"><span class="marker"></span></span><span class="b3"></span><span class="b4"></span>
+    </div>
+    <div class="band-labels"><span>NORMAL</span><span>WARNING</span><span>CRITICAL</span><span>SHUTDOWN</span></div>
+    <div class="readout">
+      <div><span>D(t)</span><b>0.31</b></div>
+      <div><span>Dominant parameter</span><b>Δ pressure</b></div>
+      <div><span>Failure window</span><b>est. 41 days</b></div>
+      <div><span>Confidence</span><b>Baseline-Locked</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="not">
+  <h2>What it doesn't do.</h2>
+  <div class="twocol">
+    <div>
+      <div class="no">/ 01</div>
+      <h4>No training data</h4>
+      <p>Nothing is fitted to historical failures. The thresholds come from physics, so the system is meaningful on day one — before it has ever seen the asset fail.</p>
+    </div>
+    <div>
+      <div class="no">/ 02</div>
+      <h4>No black box</h4>
+      <p>Every flag traces back to a named physical quantity and a published equation. There is no opaque model score to argue with — you can see exactly what drifted and why.</p>
+    </div>
+    <div>
+      <div class="no">/ 03</div>
+      <h4>No new hardware required</h4>
+      <p>PDIS-16 sits on top of the sensors, SCADA and PLCs a site already runs. If the telemetry exists, it can be read — no new instrumentation to buy or install.</p>
+    </div>
+    <div>
+      <div class="no">/ 04</div>
+      <h4>No silent assumptions</h4>
+      <p>Every fault code, default and gap is logged and surfaced — never quietly resolved in a direction nobody asked for.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="row">
+    <div class="legal">
+      SOFTBOARD (PTY) LTD<br>
+      Reg. 2026/225074/07 — South Africa
+    </div>
+    <div class="contact">
+      <a href="mailto:nksbongani7@gmail.com">bongani@softboard.co.za</a>
+      <a href="https://github.com/nksbongani7-ux" target="_blank" rel="noopener">github.com/bongani@softboard.co.za</a>
+    </div>
+  </div>
+  <div class="fineprint">PDIS-16 — Founder &amp; Director: Bongani Brendan Nkosi</div>
+</footer>
+
+</body>
+</html>
