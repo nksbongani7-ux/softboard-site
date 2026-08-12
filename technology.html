@@ -4,137 +4,249 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Technology — SoftBoard PDIS-16</title>
-<meta name="description" content="How PDIS-16 works: continuous physics-based monitoring across water, power, gas, structural, road, BESS and semiconductor assets, over OPC-UA, MQTT, Modbus and CAN.">
+<meta name="description" content="How PDIS-16 works: designed to integrate into existing SCADA and PLC systems, it runs continuous physics on live telemetry — threshold vs drift vs real-time physics, the missing filter, protocols, and a 3D API.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23E39411'/%3E%3Ccircle cx='16' cy='16' r='5' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
+<script defer src="/script.js"></script>
 </head>
 <body>
 
-<header class="top">
-  <div class="mark"><span class="dot"></span> <a href="/">SOFTBOARD</a></div>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/technology.html" class="active">Technology</a>
-    <a href="/about.html">About</a>
-  </nav>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/"><span class="logo"><span></span></span> <b>SoftBoard</b><small>PDIS-16</small></a>
+    <nav class="main">
+      <a href="/">Home</a>
+      <a href="/technology.html" class="active">Technology</a>
+      <a href="/about.html">About</a>
+      <a class="btn btn-primary nav-cta" href="/about.html">About</a>
+    </nav>
+  </div>
 </header>
 
+<!-- ===================== HERO ===================== -->
 <section class="hero">
-  <div class="eyebrow">Technology — How it works</div>
-  <h1>Continuous physics, one number per asset.</h1>
-  <p class="lede">In plain language: PDIS-16 monitors physical infrastructure continuously, produces a single drift number for each asset, and flags deviations before they become failures. No dashboards full of raw sensor noise — one value you can act on, measured against fixed physical limits rather than a guess about what "normal" looked like last week.</p>
-  <div class="equation-card">
-    <div class="label">Composite Drift Index — public-domain physics, applied live</div>
-    <div class="eq">D(t) = Σ wᵢ · |δᵢ(t)|</div>
-    <div class="note">Each δᵢ is the live deviation of one measured parameter from the physical behaviour the asset should exhibit. The formula is textbook physics; the value is what tells you how far a real asset has drifted, right now.</div>
-  </div>
-</section>
-
-<section id="system">
-  <h2>Three things happen to every reading, every cycle.</h2>
-  <div class="grid3">
-    <div class="cell">
-      <div class="tag">001 — DETECT</div>
-      <h3>Physics, not pattern-matching</h3>
-      <p>Every asset class is governed by published, peer-reviewed equations. PDIS-16 applies them continuously, so a deviation is flagged because it violates physics, not because it looks unusual to a model.</p>
-    </div>
-    <div class="cell">
-      <div class="tag">002 — CORRELATE</div>
-      <h3>Cross-sector by design</h3>
-      <p>A water-pressure drop and a power-sector current spike in the same corridor, minutes apart, are rarely a coincidence. PDIS-16's cascade logic is built to catch the failure that crosses sector lines before either utility sees it alone.</p>
-    </div>
-    <div class="cell">
-      <div class="tag">003 — VERIFY</div>
-      <h3>Distrust the sensor first</h3>
-      <p>Before any reading reaches the physics layer, it's checked for plausibility — frozen sensors, impossible rates of change, clock drift between devices. A system that can't tell a broken sensor from a broken pipe isn't ready for either.</p>
-    </div>
-  </div>
-</section>
-
-<section id="assets">
-  <h2>Asset classes it covers.</h2>
-  <p class="lead-p">Each of these is a domain of physical infrastructure PDIS-16 is designed to watch. The underlying physics differs by class — but the output is the same single, comparable drift number.</p>
-  <div class="chips">
-    <span class="chip"><span class="k">01</span>Water</span>
-    <span class="chip"><span class="k">02</span>Power</span>
-    <span class="chip"><span class="k">03</span>Gas</span>
-    <span class="chip"><span class="k">04</span>Structural</span>
-    <span class="chip"><span class="k">05</span>Road</span>
-    <span class="chip"><span class="k">06</span>BESS — battery energy storage</span>
-    <span class="chip"><span class="k">07</span>Semiconductor</span>
-    <span class="chip"><span class="k">08</span>Industrial machinery</span>
-    <span class="chip"><span class="k">09</span>Product testing &amp; validation</span>
-  </div>
-</section>
-
-<section id="protocols">
-  <h2>Protocols it speaks.</h2>
-  <p class="lead-p">PDIS-16 reads the telemetry a site already produces, over the open industrial standards it already uses. No proprietary bus, no rip-and-replace.</p>
-  <div class="chips">
-    <span class="chip"><span class="k">▸</span>OPC-UA</span>
-    <span class="chip"><span class="k">▸</span>MQTT</span>
-    <span class="chip"><span class="k">▸</span>Modbus</span>
-    <span class="chip"><span class="k">▸</span>CAN</span>
-  </div>
-</section>
-
-<section id="report">
-  <h2>What the system actually reports.</h2>
-  <div class="gauge-wrap">
-    <div class="gauge-title">Composite Drift Index — live asset, illustrative</div>
-    <div class="bands">
-      <span class="b1"></span><span class="b2"><span class="marker"></span></span><span class="b3"></span><span class="b4"></span>
-    </div>
-    <div class="band-labels"><span>NORMAL</span><span>WARNING</span><span>CRITICAL</span><span>SHUTDOWN</span></div>
-    <div class="readout">
-      <div><span>D(t)</span><b>0.31</b></div>
-      <div><span>Dominant parameter</span><b>Δ pressure</b></div>
-      <div><span>Failure window</span><b>est. 41 days</b></div>
-      <div><span>Confidence</span><b>Baseline-Locked</b></div>
-    </div>
-  </div>
-</section>
-
-<section id="not">
-  <h2>What it doesn't do.</h2>
-  <div class="twocol">
+  <div class="grid-bg"></div>
+  <div class="wrap" style="grid-template-columns:1fr; text-align:left;">
     <div>
-      <div class="no">/ 01</div>
-      <h4>No training data</h4>
-      <p>Nothing is fitted to historical failures. The thresholds come from physics, so the system is meaningful on day one — before it has ever seen the asset fail.</p>
-    </div>
-    <div>
-      <div class="no">/ 02</div>
-      <h4>No black box</h4>
-      <p>Every flag traces back to a named physical quantity and a published equation. There is no opaque model score to argue with — you can see exactly what drifted and why.</p>
-    </div>
-    <div>
-      <div class="no">/ 03</div>
-      <h4>No new hardware required</h4>
-      <p>PDIS-16 sits on top of the sensors, SCADA and PLCs a site already runs. If the telemetry exists, it can be read — no new instrumentation to buy or install.</p>
-    </div>
-    <div>
-      <div class="no">/ 04</div>
-      <h4>No silent assumptions</h4>
-      <p>Every fault code, default and gap is logged and surfaced — never quietly resolved in a direction nobody asked for.</p>
+      <span class="eyebrow">Technology · behind the screen</span>
+      <h1 style="max-width:18ch;">From raw telemetry to physics you can trust.</h1>
+      <p class="lede" style="max-width:640px;">PDIS-16 is designed to integrate into the SCADA and PLC systems you already run. It reads the telemetry your plant already produces, checks every reading against physical law, and publishes a clear drift index back to the screens your operators already use — with no new hardware and no changes to your control logic.</p>
+      <div class="cta-row"><a class="btn btn-primary" href="#pipeline">Follow the path <span class="arw">→</span></a><a class="btn btn-ghost" href="#trust">Trust &amp; safety</a></div>
     </div>
   </div>
 </section>
 
-<footer id="contact">
-  <div class="row">
-    <div class="legal">
-      SOFTBOARD (PTY) LTD<br>
-      South Africa
+<!-- ===================== PIPELINE ===================== -->
+<section id="pipeline">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Sensor to screen</div>
+      <h2>What happens between your sensor and your screen.</h2>
+      <p>Five stages, running continuously. Described as capability — the internal engine stays proprietary.</p>
     </div>
-    <div class="contact">
-      <a href="mailto:nksbongani7@gmail.com">bongani@softboard.co.za</a>
-      <a href="https://github.com/nksbongani7-ux" target="_blank" rel="noopener">github.com/bongani@softboard.co.za</a>
+    <div class="pipeline reveal">
+      <div class="pipe-track">
+        <div class="stage">
+          <div class="dotwrap"><div class="node">◨</div><span class="packet" style="animation-delay:0s"></span></div>
+          <h4>Ingest</h4>
+          <p>Reads the telemetry your plant already produces, over its existing industrial protocols.</p>
+        </div>
+        <div class="stage">
+          <div class="dotwrap"><div class="node">⛒</div></div>
+          <h4>Sanity-check</h4>
+          <p>Is this reading even physically possible? Frozen sensors, impossible values and injected data are filtered out first.</p>
+        </div>
+        <div class="stage">
+          <div class="dotwrap"><div class="node">◈</div></div>
+          <h4>Physics engine</h4>
+          <p>The governing laws of the asset run continuously against the live state.</p>
+        </div>
+        <div class="stage">
+          <div class="dotwrap"><div class="node">◭</div></div>
+          <h4>Drift index</h4>
+          <p>One clear number per asset — plus alert level, failure window and recommended action.</p>
+        </div>
+        <div class="stage">
+          <div class="dotwrap"><div class="node">▣</div></div>
+          <h4>Your screen</h4>
+          <p>Published to the SCADA / HMI screens your operators already watch.</p>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="fineprint">PDIS-16 — Founder &amp; Director: Bongani Brendan Nkosi</div>
+</section>
+
+<!-- ===================== THE FOUR BEATS ===================== -->
+<section id="explainer" class="tint">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Threshold · drift · physics · the filter</div>
+      <h2>Why physics beats a threshold.</h2>
+      <p>Four ideas, each in one technical line and one plain sentence.</p>
+    </div>
+    <div class="beats reveal">
+      <div class="beat head">
+        <div class="b-name">Concept</div>
+        <div class="b-tech">Technically</div>
+        <div class="b-plain">In plain words</div>
+      </div>
+      <div class="beat">
+        <div class="b-name"><span class="chip" style="background:var(--crit)"></span>Threshold</div>
+        <div class="b-tech">Fires only when a variable crosses a fixed limit.</div>
+        <div class="b-plain">A tripwire — it only shouts after you've already hit it.</div>
+      </div>
+      <div class="beat">
+        <div class="b-name"><span class="chip" style="background:var(--warn)"></span>Drift detection</div>
+        <div class="b-tech">Tracks continuous deviation from expected physical behaviour.</div>
+        <div class="b-plain">It notices the slow slide while the numbers still look fine.</div>
+      </div>
+      <div class="beat">
+        <div class="b-name"><span class="chip" style="background:var(--ok)"></span>Real-time physics</div>
+        <div class="b-tech">Cross-checks readings against the governing physical laws of the asset.</div>
+        <div class="b-plain">It knows what's possible, not just what's high.</div>
+      </div>
+      <div class="beat">
+        <div class="b-name"><span class="chip" style="background:var(--ink)"></span>The missing filter</div>
+        <div class="b-tech">SCADA displays whatever it receives — noise, frozen sensors, out-of-order or injected data.</div>
+        <div class="b-plain">SCADA believes its sensors. PDIS-16 checks whether they're telling the truth.</div>
+      </div>
+    </div>
+    <div class="callout reveal" style="margin-top:28px;">
+      <div class="big">You can fake a sensor reading. <span class="amber">You can't fake physics.</span></div>
+      <p>Because every value is validated against physical law, a reading manipulated to look normal but inconsistent with the system's physics is rejected — regardless of whether its network login was valid. The physics is the filter attackers can't talk their way past.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THE SPECTRUM ===================== -->
+<section id="spectrum">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Where it fits</div>
+      <h2>PLC controls. SCADA displays. PDIS-16 validates the physics.</h2>
+      <p>Not a replacement for anything you run — a physics layer that integrates into both.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="num">CONTROL LAYER</div>
+        <h3>PLC</h3>
+        <p>Runs high-speed control loops — open the valve, stop the motor. Excellent at logic; blind to multi-variable physics.</p>
+      </div>
+      <div class="card reveal" data-d="1" style="border-color:var(--amber-ring); box-shadow:var(--shadow-md);">
+        <div class="num" style="color:var(--amber-2)">PHYSICS LAYER</div>
+        <h3>PDIS-16</h3>
+        <p>Validates cross-sensor causality and physical law in real time, and surfaces drift before failure. Integrates into your existing SCADA and PLC.</p>
+      </div>
+      <div class="card reveal" data-d="2">
+        <div class="num">DISPLAY LAYER</div>
+        <h3>SCADA</h3>
+        <p>Renders sensor numbers and sets static red-line alarms for operators. Sees only what it's shown — after a limit breaks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INTEGRATION / 3D API ===================== -->
+<section id="integration" class="tint">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Integration</div>
+      <h2>Fits in beside what you already run.</h2>
+    </div>
+    <div class="trust">
+      <div class="t reveal"><div class="ic">⇄</div><div><h4>Non-invasive</h4><p>No new hardware, no rewiring, and no changes to your PLC code. It works alongside your established control loops.</p></div></div>
+      <div class="t reveal" data-d="1"><div class="ic">◫</div><div><h4>Publishes to your existing screens</h4><p>Computed values appear on your SCADA / HMI exactly like any other instrument tag — no custom dashboards to build.</p></div></div>
+      <div class="t reveal"><div class="ic">◵</div><div><h4>3D &amp; digital-twin API</h4><p>Once the physics is processed, PDIS-16 exposes an API so its results can feed and run on connected 3D and digital-twin systems.</p></div></div>
+      <div class="t reveal" data-d="1"><div class="ic">◰</div><div><h4>Runs at the edge</h4><p>Processing lives inside your facility, next to your controllers — it keeps working even if a screen freezes or a link drops.</p></div></div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:52px;">
+      <h2 style="font-size:clamp(20px,2.6vw,26px);">Speaks your plant's protocols.</h2>
+    </div>
+    <div class="chips reveal">
+      <span class="chip proto"><span class="k">▸</span>OPC-UA</span>
+      <span class="chip proto"><span class="k">▸</span>MQTT / Sparkplug B</span>
+      <span class="chip proto"><span class="k">▸</span>Modbus TCP</span>
+      <span class="chip proto"><span class="k">▸</span>CAN bus</span>
+      <span class="chip proto"><span class="k">▸</span>Fieldbus / Industrial Ethernet</span>
+      <span class="chip proto"><span class="k">▸</span>Authenticated API</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INDUSTRIES ===================== -->
+<section id="industries">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Coverage</div>
+      <h2>The asset classes it watches.</h2>
+      <p>Different physics per class — one comparable drift number out.</p>
+    </div>
+    <div class="chips reveal">
+      <span class="chip"><span class="k">01</span>Water</span>
+      <span class="chip"><span class="k">02</span>Power</span>
+      <span class="chip"><span class="k">03</span>Gas</span>
+      <span class="chip"><span class="k">04</span>Structural</span>
+      <span class="chip"><span class="k">05</span>Road</span>
+      <span class="chip"><span class="k">06</span>BESS — battery energy storage</span>
+      <span class="chip"><span class="k">07</span>Semiconductor</span>
+      <span class="chip"><span class="k">08</span>Industrial machinery</span>
+      <span class="chip"><span class="k">09</span>Product testing &amp; validation</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRUST & SAFETY ===================== -->
+<section id="trust" class="tint">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Built to be trusted</div>
+      <h2>Deterministic, auditable, and honest about what it knows.</h2>
+    </div>
+    <div class="trust">
+      <div class="t reveal"><div class="ic">◈</div><div><h4>No black-box AI</h4><p>Every alert traces to physical law and material limits — not an opaque model score you can't interrogate.</p></div></div>
+      <div class="t reveal" data-d="1"><div class="ic">≡</div><div><h4>Deterministic</h4><p>The same inputs always produce the same result. No probabilistic guessing on a safety-relevant path.</p></div></div>
+      <div class="t reveal"><div class="ic">◱</div><div><h4>Fails loud, never silent</h4><p>Every asset is fully monitored, degraded-but-flagged, or halted and logged. There is no silent fourth state where it quietly produces numbers it can't stand behind.</p></div></div>
+      <div class="t reveal" data-d="1"><div class="ic">◎</div><div><h4>Tamper-evident evidence</h4><p>A non-repudiable record every alert and action links back to — for insurers, regulators and asset owners.</p></div></div>
+      <div class="t reveal"><div class="ic">⛨</div><div><h4>No training data</h4><p>Nothing is fitted to historical failures. It's meaningful on day one, before it has ever seen the asset fail.</p></div></div>
+      <div class="t reveal" data-d="1"><div class="ic">◰</div><div><h4>Functional-safety posture</h4><p>Built on established high-integrity control-systems practice, aligned to industrial functional-safety standards.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta">
+  <div class="wrap">
+    <div class="box reveal">
+      <div>
+        <h2>See where SCADA missed it.</h2>
+        <p>Real, documented failures — and the minor signal physics would have caught.</p>
+      </div>
+      <a class="btn btn-primary" href="/#events">View the events <span class="arw">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site">
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <a class="brand" href="/"><span class="logo"><span></span></span> <b>SoftBoard</b><small>PDIS-16</small></a>
+        <p class="legal">The physics-driven infrastructure stability system — continuous physics monitoring for critical assets, built to integrate into the SCADA and PLC systems you already run.</p>
+      </div>
+      <div class="links">
+        <a href="/technology.html">Technology</a>
+        <a href="/about.html">About</a>
+        <a href="mailto:bongani@softboard.co.za">bongani@softboard.co.za</a>
+        <a href="https://github.com/nksbongani7-ux" target="_blank" rel="noopener">github.com/bongani@softboard.co.za</a>
+      </div>
+    </div>
+    <div class="fineprint">SOFTBOARD (PTY) LTD — South Africa</div>
+  </div>
 </footer>
 
 </body>

@@ -3,84 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — SoftBoard PDIS-16</title>
-<meta name="description" content="SoftBoard is a South-African-built company behind PDIS-16, a physics-driven infrastructure stability system. Founder-built, moving toward independent technical validation.">
+<title>About — SoftBoard</title>
+<meta name="description" content="SoftBoard is the company behind PDIS-16. Based in South Africa — but physics doesn't have borders.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23E39411'/%3E%3Ccircle cx='16' cy='16' r='5' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
+<script defer src="/script.js"></script>
 </head>
 <body>
 
-<header class="top">
-  <div class="mark"><span class="dot"></span> <a href="/">SOFTBOARD</a></div>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/technology.html">Technology</a>
-    <a href="/about.html" class="active">About</a>
-  </nav>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/"><span class="logo"><span></span></span> <b>SoftBoard</b><small>PDIS-16</small></a>
+    <nav class="main">
+      <a href="/">Home</a>
+      <a href="/technology.html">Technology</a>
+      <a href="/about.html" class="active">About</a>
+      <a class="btn btn-primary nav-cta" href="/technology.html">How it works</a>
+    </nav>
+  </div>
 </header>
 
-<section class="hero">
-  <div class="eyebrow">About — SoftBoard</div>
-  <h1>Built from South Africa, for physics that looks the same everywhere.</h1>
-  <p class="lede">SoftBoard is the company behind PDIS-16. We're building infrastructure monitoring that a working engineer would recognise — grounded in the equations already used to design pipes, structures and power systems, applied continuously instead of once at commissioning. This page is about who's building it and where it honestly stands today.</p>
+<!-- ===================== HERO ===================== -->
+<section class="about-hero">
+  <div class="grid-bg" style="position:absolute;inset:0;"></div>
+  <div class="wrap" style="position:relative;">
+    <span class="eyebrow">About</span>
+    <h1 style="margin-top:16px;">SoftBoard is the company behind <span class="amber">PDIS-16</span>.</h1>
+    <p>Based in South Africa — but physics doesn't have borders. A pipe under pressure behaves the same in Johannesburg, Rotterdam or Houston, so a system built on physical law travels without being rebuilt for each site.</p>
+  </div>
 </section>
 
+<!-- ===================== MISSION ===================== -->
 <section id="mission">
-  <h2>Why we build this way.</h2>
-  <div class="prose">
-    <p>Most infrastructure monitoring answers the wrong question. It asks "does this reading look unusual compared to the past?" — a question that needs history, tuning, and a model nobody fully trusts. PDIS-16 asks a harder but more honest one: "does this reading violate the physics of the asset?" That question has a fixed answer that doesn't drift with the training set, and it's meaningful the very first day a sensor comes online.</p>
-    <p>A pipe under pressure behaves like physics, not geography. That's the whole thesis: the same equations hold in Johannesburg, Rotterdam or Houston, so a system built on them travels without being retrained for each site.</p>
-  </div>
-</section>
-
-<section id="principles">
-  <h2>What we're building toward, plainly.</h2>
-  <div class="principles">
-    <div>
-      <div class="no">/ 01</div>
-      <h4>Additive, not a replacement</h4>
-      <p>PDIS-16 sits on top of telemetry a site already has — SCADA, PLC, existing sensors. We don't ask anyone to rip out instrumentation that already works.</p>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Why we build this way</div>
+      <h2>We don't ask what's unusual. We ask what's physically possible.</h2>
+      <p>Most monitoring compares a reading to the past — and needs history, tuning, and a model nobody fully trusts. PDIS-16 asks a harder, more honest question: does this reading obey the physics of the asset? That answer is fixed, doesn't drift with a training set, and is meaningful the first day a sensor comes online.</p>
     </div>
-    <div>
-      <div class="no">/ 02</div>
-      <h4>No silent assumptions</h4>
-      <p>Every fault code, every default, every gap is logged and surfaced — never quietly resolved in a direction nobody asked for.</p>
-    </div>
-    <div>
-      <div class="no">/ 03</div>
-      <h4>Early, and honest about it</h4>
-      <p>This is a founder-built architecture, fully specified and implemented in software, currently moving toward independent technical validation. We'd rather say that plainly than overstate where we are.</p>
-    </div>
-    <div>
-      <div class="no">/ 04</div>
-      <h4>South African-built, globally scoped</h4>
-      <p>SoftBoard is built from South Africa, for infrastructure that looks the same everywhere — a pipe under pressure behaves like physics, not geography.</p>
+    <div class="principles">
+      <div class="p reveal">
+        <div class="n">/ 01</div>
+        <h4>Deterministic, not probabilistic</h4>
+        <p>Real-time safety demands answers that are the same every time — not statistical guesses.</p>
+      </div>
+      <div class="p reveal" data-d="1">
+        <div class="n">/ 02</div>
+        <h4>Additive, not a rip-and-replace</h4>
+        <p>It integrates into the SCADA and PLC systems already in place — no proprietary hardware overhaul required.</p>
+      </div>
+      <div class="p reveal" data-d="2">
+        <div class="n">/ 03</div>
+        <h4>Clarity for the operator</h4>
+        <p>One clear physical truth on the screen — the noise filtered out, the essential action surfaced.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="stage">
-  <h2>Where it stands today.</h2>
-  <div class="prose">
-    <p>PDIS-16 is a founder-built architecture — fully specified and implemented in software, currently moving toward independent technical validation. We're deliberate about not overstating that. The system is real and it runs; what comes next is rigorous, outside-in verification against real assets and real telemetry.</p>
-    <p>SoftBoard (Pty) Ltd is a registered South African company. Founder and Director: Bongani Brendan Nkosi.</p>
+<!-- ===================== STATUS ===================== -->
+<section id="status" class="tint">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Where it stands</div>
+      <h2>A working, proven system — not a concept.</h2>
+      <p>PDIS-16 is fully developed and operational: a built, working system that runs continuous physics against live telemetry and integrates into existing SCADA and PLC environments. Our mission is simple — engineer deterministic software that bridges industrial automation with real-time physical truth, and prevent catastrophic drift in critical assets before it becomes failure.</p>
+    </div>
+    <div class="cta">
+      <div class="box reveal" style="margin-top:8px;">
+        <div>
+          <h2>See what's behind the screen.</h2>
+          <p>How PDIS-16 turns raw telemetry into physics you can trust.</p>
+        </div>
+        <a class="btn btn-primary" href="/technology.html">Explore the technology <span class="arw">→</span></a>
+      </div>
+    </div>
   </div>
 </section>
 
-<footer id="contact">
-  <div class="row">
-    <div class="legal">
-      SOFTBOARD (PTY) LTD<br>
-      South Africa
+<!-- ===================== FOOTER ===================== -->
+<footer class="site">
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <a class="brand" href="/"><span class="logo"><span></span></span> <b>SoftBoard</b><small>PDIS-16</small></a>
+        <p class="legal">The physics-driven infrastructure stability system — continuous physics monitoring for critical assets, built to integrate into the SCADA and PLC systems you already run.</p>
+      </div>
+      <div class="links">
+        <a href="/technology.html">Technology</a>
+        <a href="/about.html">About</a>
+        <a href="mailto:bongani@softboard.co.za">bongani@softboard.co.za</a>
+        <a href="https://github.com/nksbongani7-ux" target="_blank" rel="noopener">github.com/bongani@softboard.co.za</a>
+      </div>
     </div>
-    <div class="contact">
-      <a href="mailto:nksbongani7@gmail.com">bongani@softboard.co.za</a>
-      <a href="https://github.com/nksbongani7-ux" target="_blank" rel="noopener">github.com/bongani@softboard.co.za</a>
-    </div>
+    <div class="fineprint">SOFTBOARD (PTY) LTD — South Africa</div>
   </div>
-  <div class="fineprint">PDIS-16 — Founder &amp; Director: Bongani Brendan Nkosi</div>
 </footer>
 
 </body>
